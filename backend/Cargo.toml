@@ -1,0 +1,8 @@
+[package]
+name = "backend"
+version = "0.0.1"
+edition = "2024"
+
+[dependencies]
+ir = { path = "../ir" }
+memmap2 = "0.9"

@@ -1,0 +1,23 @@
+func @fibonacci(%n: i64) -> i64 {
+entry:
+    %c0: i64 = const.int 0
+    %c1: i64 = const.int 1
+    %is_zero: i1 = cmp eq %n, %c0
+    br %is_zero, return_block, loop_init
+
+loop_init:
+    jmp loop_block
+
+loop_block:
+    %i: i64 = phi [ %c1, loop_init ], [ %next_i, loop_block ]
+    %a: i64 = phi [ %c0, loop_init ], [ %b, loop_block ]
+    %b: i64 = phi [ %c1, loop_init ], [ %sum, loop_block ]
+    %sum: i64 = add %a, %b
+    %next_i: i64 = add %i, %c1
+    %done: i1 = cmp ge %i, %n
+    br %done, return_block, loop_block
+
+return_block:
+    %res: i64 = phi [ %c0, entry ], [ %sum, loop_block ]
+    ret %res
+}

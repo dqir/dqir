@@ -1,0 +1,9 @@
+[package]
+name = "query"
+version = "0.0.1"
+edition = "2024"
+
+[dependencies]
+salsa = "0.28"
+ir = { path = "../ir" }
+backend = { path = "../backend" }

@@ -1,0 +1,24 @@
+func @factorial(%n: i64) -> i64 {
+entry:
+    %c0: i64 = const.int 0
+    %c1: i64 = const.int 1
+    %is_zero: i1 = cmp le %n, %c0
+    br %is_zero, return_one, loop_init
+
+return_one:
+    ret %c1
+
+loop_init:
+    jmp loop_block
+
+loop_block:
+    %i: i64 = phi [ %c1, loop_init ], [ %next_i, loop_block ]
+    %acc: i64 = phi [ %c1, loop_init ], [ %next_acc, loop_block ]
+    %next_acc: i64 = mul %acc, %i
+    %next_i: i64 = add %i, %c1
+    %done: i1 = cmp gt %i, %n
+    br %done, return_res, loop_block
+
+return_res:
+    ret %acc
+}

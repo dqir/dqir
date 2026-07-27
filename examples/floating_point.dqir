@@ -1,0 +1,7 @@
+func @float_bit_pattern(%x: f64) -> f64 {
+entry:
+    %c1: f64 = const.float 3.5
+    %c2: f64 = const.float 2.5
+    %folded_sum: f64 = add %c1, %c2
+    ret %folded_sum
+}

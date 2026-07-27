@@ -1,0 +1,9 @@
+func @memory_example(%val: i64) -> i64 {
+entry:
+    %ptr: ptr = alloca i64
+    store %val, %ptr, 0
+    %loaded: i64 = load i64, %ptr, 0
+    %c10: i64 = const.int 10
+    %res: i64 = add %loaded, %c10
+    ret %res
+}
